@@ -25,11 +25,12 @@ const load = function(config = '') {
 
     _config      = require(config);
     _config_path = config;
+    _server = process.env.NODE_ENV || 'server';
     _sequelize   = new Sequelize(
-        _config.server.database,
-        _config.server.username,
-        _config.server.password,
-        Pick(_config.server, ['host', 'dialect', 'define'])
+        _config[_server].database,
+        _config[_server].username,
+        _config[_server].password,
+        Pick(_config[_server], ['host', 'dialect', 'define'])
     );
     _models      = new Proxy({}, {
         get: (target, prop, receiver) => (prop in target ? true : autoload(prop)) && target[prop]
