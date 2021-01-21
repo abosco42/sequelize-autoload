@@ -25,7 +25,7 @@ const load = function(config = '') {
 
     _config      = require(config);
     _config_path = config;
-    _server = process.env.NODE_ENV || 'development';
+    _server = process.env.NODE_ENV || 'server';
     _sequelize   = new Sequelize(
         _config[_server].database,
         _config[_server].username,
